@@ -7,9 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Modern Romantic Color Palette */
+        /* Refined Romantic Color Palette */
         body { 
-            background-color: #fff0f5; /* Lavender Blush (Soft Rose) */
+            background-color: #fff0f5; 
             font-family: 'Poppins', sans-serif; 
             min-height: 100vh; 
             margin: 0; 
@@ -17,7 +17,7 @@
         }
 
         .header-container {
-            background: #ff0000; /* Bright Red */
+            background: #cc0000; /* Toned down bright red */
             color: white; 
             padding: 60px 20px; 
             text-align: center;
@@ -40,7 +40,7 @@
             background: white; 
             border: none; 
             border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(204, 0, 0, 0.1);
             max-width: 500px; 
             width: 100%; 
             padding: 50px 30px; 
@@ -49,7 +49,7 @@
 
         /* Buttons */
         .btn-love { 
-            background-color: #ff0000; 
+            background-color: #cc0000; 
             color: white; 
             border-radius: 50px; 
             padding: 12px 35px; 
@@ -58,13 +58,13 @@
             font-weight: 600; 
         }
         .btn-love:hover { 
-            background-color: #cc0000; 
+            background-color: #990000; 
             transform: scale(1.05); 
             color: white; 
         }
         .btn-outline-love { 
-            border: 2px solid #ff0000; 
-            color: #ff0000; 
+            border: 2px solid #cc0000; 
+            color: #cc0000; 
             border-radius: 50px; 
             padding: 12px 35px; 
             background: transparent; 
@@ -81,7 +81,7 @@
         }
         .pros-card { border-top: 6px solid #4ade80; background: #ffffff; text-align: left; }
         .cons-card { 
-            border-top: 6px solid #ff0000; 
+            border-top: 6px solid #cc0000; 
             background: #ffffff; 
             display: flex; 
             align-items: center; 
@@ -98,24 +98,24 @@
             display: flex; align-items: center; justify-content: center; border-radius: 25px; padding: 25px;
         }
         .flip-card-front { 
-            background: linear-gradient(135deg, #ff4d4d 0%, #ff0000 100%); 
+            background: linear-gradient(135deg, #ff4d4d 0%, #cc0000 100%); 
             color: white; font-size: 2rem; font-weight: bold; 
             border: 4px dashed rgba(255,255,255,0.4); 
         }
         .flip-card-back { 
             background-color: white; color: #333; 
             transform: rotateY(180deg); 
-            border: 2px solid #ff0000; 
+            border: 2px solid #cc0000; 
         }
 
-        /* Specific Text Coloring */
-        .highlight-red { color: #ff0000; font-weight: 800; display: block; margin-bottom: 5px; }
-        .reveal-text { font-family: 'Dancing Script', cursive; font-size: 1.6rem; line-height: 1.5; }
+        /* Specific Text Coloring & Spacing */
+        .highlight-red { color: #cc0000; font-weight: 800; display: block; margin-bottom: 0px; line-height: 1.2; }
+        .reveal-text { font-family: 'Dancing Script', cursive; font-size: 1.6rem; line-height: 1.3; }
 
         /* Countdown */
         #countdownContainer { display: none; margin-top: 60px; text-align: center; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 600px; }
         .timer-unit { display: inline-block; margin: 0 20px; }
-        .timer-num { font-size: 3rem; font-weight: 700; color: #ff0000; display: block; }
+        .timer-num { font-size: 3rem; font-weight: 700; color: #cc0000; display: block; }
         .timer-label { font-size: 0.9rem; text-transform: uppercase; color: #888; letter-spacing: 1px; }
     </style>
 </head>
@@ -142,7 +142,7 @@
         </div>
 
         <div id="giftSection">
-            <h2 class="text-center romantic-font mb-5" style="color: #ff0000; font-size: 4rem;">Your Surprises...</h2>
+            <h2 class="text-center romantic-font mb-5" style="color: #cc0000; font-size: 4rem;">Your Surprises...</h2>
             <div class="row g-4 justify-content-center">
                 <div class="col-md-4">
                     <div class="flip-card" onclick="handleFlip(this, 'card1')">
@@ -164,7 +164,7 @@
                             <div class="flip-card-back">
                                 <div class="reveal-text">
                                     <span class="highlight-red">Tomorrow Dinner</span>
-                                    <br>has 2 free glasses of Wine<br>so lets enjoy 🍷
+                                    has 2 free glasses of Wine<br>so lets enjoy 🍷
                                 </div>
                             </div>
                         </div>
@@ -185,7 +185,7 @@
             </div>
 
             <div id="countdownContainer" class="mx-auto">
-                <h3 class="romantic-font mb-4" style="font-size: 2.5rem; color: #ff0000;">The next surprise unlocks in...</h3>
+                <h3 class="romantic-font mb-4" style="font-size: 2.5rem; color: #cc0000;">The next surprise unlocks in...</h3>
                 <div id="timer">
                     <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hours</span></div>
                     <div class="timer-unit"><span class="timer-num" id="minutes">00</span><span class="timer-label">Mins</span></div>
@@ -199,7 +199,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content p-4 border-0" style="border-radius: 30px;">
                 <div class="modal-header border-0">
-                    <h3 class="modal-title w-100 text-center romantic-font" style="color: #ff0000; font-size: 3rem;">Wait! Let's look at the facts...</h3>
+                    <h3 class="modal-title w-100 text-center romantic-font" style="color: #cc0000; font-size: 3rem;">Wait! Let's look at the facts...</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -218,7 +218,7 @@
                         <div class="col-md-6">
                             <div class="card comparison-card cons-card p-4">
                                 <div>
-                                    <h4 class="fw-bold mb-3" style="color:#ff0000">Cons</h4>
+                                    <h4 class="fw-bold mb-3" style="color:#cc0000">Cons</h4>
                                     <h5 class="text-muted">❤️ No Cons</h5>
                                 </div>
                             </div>
@@ -239,7 +239,7 @@
         function sayYes() {
             document.getElementById('inviteCard').innerHTML = `
                 <div style="font-size: 4rem;">🎉</div>
-                <h2 class="romantic-font" style="font-size: 4rem; color: #ff0000; margin: 20px 0;">See You Soon! 💖</h2>
+                <h2 class="romantic-font" style="font-size: 4rem; color: #cc0000; margin: 20px 0;">See You Soon! 💖</h2>
             `;
             document.getElementById('surpriseContainer').style.display = 'block';
         }
@@ -255,7 +255,6 @@
         function handleFlip(cardElement, cardId) {
             cardElement.classList.add('flipped');
             flippedCards.add(cardId);
-            // Show countdown when all 3 cards are flipped
             if (flippedCards.size === 3) {
                 document.getElementById('countdownContainer').style.display = 'block';
                 startCountdown();
@@ -264,7 +263,6 @@
 
         function startCountdown() {
             const timer = setInterval(function() {
-                // Target: Tomorrow at 12:00 PM (IST Logic)
                 let target = new Date();
                 target.setDate(target.getDate() + 1);
                 target.setHours(12, 0, 0, 0);
