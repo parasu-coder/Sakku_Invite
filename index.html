@@ -17,11 +17,13 @@
         }
         .captcha-box {
             background: white; padding: 30px; border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #ddd;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            /* MODIFIED LINE BELOW: Changed border color to red and thickness to 2px */
+            border: 2px solid #F43605; 
             display: flex; align-items: center; gap: 15px;
         }
-        .captcha-box input[type="checkbox"] { width: 25px; height: 25px; cursor: pointer; }
-        .captcha-text { font-size: 1.2rem; color: #555; }
+        .captcha-box input[type="checkbox"] { width: 25px; height: 25px; cursor: pointer; accent-color: #F43605; }
+        .captcha-text { font-size: 1.2rem; color: #555; font-weight: 600; }
 
         /* Main Content (Hidden initially) */
         #mainContent { opacity: 0; transition: 1s opacity; display: none; }
