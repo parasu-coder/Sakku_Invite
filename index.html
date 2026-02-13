@@ -3,157 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Invite</title>
+    <title>For Sakku ❤️</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #fff0f5; font-family: 'Poppins', sans-serif; min-height: 100vh; margin: 0; padding-bottom: 100px; }
-        .header-container { background: #cc0000; color: white; padding: 60px 20px; text-align: center; border-bottom-left-radius: 50% 10%; border-bottom-right-radius: 50% 10%; box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
+        body { background-color: #fff0f5; font-family: 'Poppins', sans-serif; min-height: 100vh; margin: 0; overflow-x: hidden; }
+        
+        /* Captcha Overlay */
+        #captchaOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #fff0f5; display: flex; justify-content: center;
+            align-items: center; z-index: 9999; transition: 0.5s;
+        }
+        .captcha-box {
+            background: white; padding: 30px; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #ddd;
+            display: flex; align-items: center; gap: 15px;
+        }
+        .captcha-box input[type="checkbox"] { width: 25px; height: 25px; cursor: pointer; }
+        .captcha-text { font-size: 1.2rem; color: #555; }
+
+        /* Main Content (Hidden initially) */
+        #mainContent { opacity: 0; transition: 1s opacity; display: none; }
+
+        .header-container { 
+            background: #F43605; /* Your requested color */
+            color: white; padding: 60px 20px; text-align: center; 
+            border-bottom-left-radius: 50% 10%; border-bottom-right-radius: 50% 10%; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15); 
+        }
         h1, .romantic-font { font-family: 'Dancing Script', cursive; }
         .main-container { display: flex; justify-content: center; align-items: center; padding: 40px 20px; flex-direction: column; }
-        .valentine-card { background: white; border: none; border-radius: 25px; box-shadow: 0 15px 35px rgba(204, 0, 0, 0.1); max-width: 500px; width: 100%; padding: 50px 30px; text-align: center; }
+        .valentine-card { background: white; border: none; border-radius: 25px; box-shadow: 0 15px 35px rgba(244, 54, 5, 0.1); max-width: 500px; width: 100%; padding: 50px 30px; text-align: center; }
         
         /* Buttons */
-        .btn-love { background-color: #cc0000; color: white; border-radius: 50px; padding: 12px 35px; border: none; transition: 0.3s; font-weight: 600; }
-        .btn-love:hover { background-color: #990000; transform: scale(1.05); color: white; }
-        .btn-outline-love { border: 2px solid #cc0000; color: #cc0000; border-radius: 50px; padding: 12px 35px; background: transparent; transition: 0.3s; }
-        .btn-outline-love:hover { background-color: #cc0000; color: white; }
+        .btn-love { background-color: #F43605; color: white; border-radius: 50px; padding: 12px 35px; border: none; font-weight: 600; }
+        .btn-outline-love { border: 2px solid #F43605; color: #F43605; border-radius: 50px; padding: 12px 35px; background: transparent; transition: 0.3s; }
 
-        /* The "Dead" Button Style - remains clickable but does nothing */
-        #deadYesBtn { cursor: pointer; }
-
-        /* Modal Styles with Borders */
-        .comparison-card { border-radius: 20px; height: 230px; display: flex; flex-direction: column; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 3px solid #cc0000 !important; }
-        .pros-card { background: #ffffff; text-align: left; }
-        .cons-card { background: #ffffff; display: flex; align-items: center; justify-content: center; }
-
+        /* Modal & Comparison Cards */
+        .comparison-card { border-radius: 20px; height: 230px; display: flex; flex-direction: column; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 3px solid #F43605 !important; }
+        
         /* Flip Cards */
         #giftSection { display: none; width: 100%; max-width: 1100px; margin-top: 40px; }
-        .flip-card { background-color: transparent; width: 100%; height: 300px; perspective: 1000px; cursor: pointer; }
+        .flip-card { background-color: transparent; width: 100%; height: 300px; perspective: 1000px; cursor: pointer; margin-bottom: 20px;}
         .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; }
         .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
         .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 25px; padding: 25px; }
-        .flip-card-front { background: linear-gradient(135deg, #ff4d4d 0%, #cc0000 100%); color: white; font-size: 2rem; font-weight: bold; border: 4px dashed rgba(255,255,255,0.4); }
-        .flip-card-back { background-color: white; color: #333; transform: rotateY(180deg); border: 2px solid #cc0000; }
-        .highlight-red { color: #cc0000; font-weight: 800; display: block; margin-bottom: 0px; line-height: 1.2; }
+        .flip-card-front { background: linear-gradient(135deg, #ff6b4a 0%, #F43605 100%); color: white; font-size: 2rem; font-weight: bold; border: 4px dashed rgba(255,255,255,0.4); }
+        .flip-card-back { background-color: white; color: #333; transform: rotateY(180deg); border: 2px solid #F43605; }
+        
+        .highlight-red { color: #F43605; font-weight: 800; display: block; margin-bottom: 0px; line-height: 1.2; }
         .reveal-text { font-family: 'Dancing Script', cursive; font-size: 1.6rem; line-height: 1.3; }
 
         /* Countdown */
-        #countdownContainer { display: none; margin-top: 60px; text-align: center; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 600px; border: 2px solid #cc0000; }
-        .timer-unit { display: inline-block; margin: 0 20px; }
-        .timer-num { font-size: 3rem; font-weight: 700; color: #cc0000; display: block; }
-        .timer-label { font-size: 0.9rem; text-transform: uppercase; color: #888; letter-spacing: 1px; }
+        #countdownContainer { display: none; margin-top: 60px; text-align: center; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 600px; border: 2px solid #F43605; }
+        .timer-num { font-size: 3rem; font-weight: 700; color: #F43605; }
     </style>
 </head>
 <body>
 
-    <header class="header-container">
-        <h1 class="display-3">Valentine's Day Invite</h1>
-    </header>
-
-    <main class="main-container">
-        <div class="card valentine-card" id="inviteCard">
-            <div class="card-body">
-                <div style="font-size: 4rem; margin-bottom: 10px;">❤️</div>
-                <h2 class="my-4" style="color: #590d22; font-weight: 600;">Will You be my Valentine?</h2>
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-love m-2" id="deadYesBtn">Yes</button>
-                    <button class="btn btn-outline-love m-2" onclick="sayYes()">No</button>
-                </div>
-            </div>
+    <div id="captchaOverlay">
+        <div class="captcha-box">
+            <input type="checkbox" id="sakkuCheck" onclick="verifySakku()">
+            <span class="captcha-text">Prove you are Sakku</span>
         </div>
+    </div>
 
-        <div id="surpriseContainer" class="text-center mt-5" style="display:none;">
-            <button class="btn btn-love btn-lg px-5 shadow-lg" onclick="showGifts()">Here are some surprise Gifts 🎁</button>
-        </div>
+    <div id="mainContent">
+        <header class="header-container">
+            <h1 class="display-3">Valentine's Day Invite Sakku</h1>
+        </header>
 
-        <div id="giftSection">
-            <h2 class="text-center romantic-font mb-5" style="color: #cc0000; font-size: 4rem;">Your Surprises...</h2>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4">
-                    <div class="flip-card" onclick="handleFlip(this, 'card1')">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">Gift 1</div>
-                            <div class="flip-card-back">
-                                <div class="reveal-text">
-                                    <span class="highlight-red">Mounam Pesiyadhe</span>
-                                    2 tickets tomorrow<br>4.20pm
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="flip-card" onclick="handleFlip(this, 'card2')">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">Gift 2</div>
-                            <div class="flip-card-back">
-                                <div class="reveal-text">
-                                    <span class="highlight-red">Tomorrow Dinner</span>
-                                    has 2 free glasses of Wine<br>so lets enjoy 🍷
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="flip-card" onclick="handleFlip(this, 'card3')">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">Gift 3</div>
-                            <div class="flip-card-back">
-                                <div class="reveal-text">
-                                    Dont let me ruin all<br>surprises for you now itself<br>wait till tomorrow for the rest 🫣
-                                </div>
-                            </div>
-                        </div>
+        <main class="main-container">
+            <div class="card valentine-card" id="inviteCard">
+                <div class="card-body">
+                    <div style="font-size: 4rem; margin-bottom: 10px;">❤️</div>
+                    <h2 class="my-4" style="color: #590d22; font-weight: 600;">Will You be my Valentine?</h2>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-love m-2" id="deadYesBtn">Yes</button>
+                        <button class="btn btn-outline-love m-2" onclick="showModal()">No</button>
                     </div>
                 </div>
             </div>
 
-            <div id="countdownContainer" class="mx-auto">
-                <h3 class="romantic-font mb-4" style="font-size: 2.5rem; color: #cc0000;">The next surprise unlocks in...</h3>
-                <div id="timer">
-                    <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Hours</span></div>
-                    <div class="timer-unit"><span class="timer-num" id="minutes">00</span><span class="timer-label">Mins</span></div>
-                    <div class="timer-unit"><span class="timer-num" id="seconds">00</span><span class="timer-label">Secs</span></div>
+            <div id="surpriseContainer" class="text-center mt-5" style="display:none;">
+                <button class="btn btn-love btn-lg px-5 shadow-lg" onclick="showGifts()">Here are some surprise Gifts 🎁</button>
+            </div>
+
+            <div id="giftSection">
+                <h2 class="text-center romantic-font mb-5" style="color: #F43605; font-size: 4rem;">Your Surprises...</h2>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="flip-card" onclick="handleFlip(this, 'card1')">
+                            <div class="flip-card-inner"><div class="flip-card-front">Gift 1</div><div class="flip-card-back"><div class="reveal-text"><span class="highlight-red">Mounam Pesiyadhe</span>2 tickets tomorrow<br>4.20pm</div></div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="flip-card" onclick="handleFlip(this, 'card2')">
+                            <div class="flip-card-inner"><div class="flip-card-front">Gift 2</div><div class="flip-card-back"><div class="reveal-text"><span class="highlight-red">Tomorrow Dinner</span>has 2 free glasses of Wine<br>so lets enjoy 🍷</div></div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="flip-card" onclick="handleFlip(this, 'card3')">
+                            <div class="flip-card-inner"><div class="flip-card-front">Gift 3</div><div class="flip-card-back"><div class="reveal-text">Dont let me ruin all<br>surprises for you now itself<br>wait till tomorrow for the rest 🫣</div></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="countdownContainer" class="mx-auto">
+                    <h3 class="romantic-font mb-4" style="font-size: 2.5rem; color: #F43605;">The next surprise unlocks in...</h3>
+                    <div id="timer">
+                        <span class="timer-num" id="hours">00</span><small>h</small>
+                        <span class="timer-num" id="minutes">00</span><small>m</small>
+                        <span class="timer-num" id="seconds">00</span><small>s</small>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <div class="modal fade" id="prosConsModal" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content p-4 border-0" style="border-radius: 30px;">
-                <div class="modal-header border-0">
-                    <h3 class="modal-title w-100 text-center romantic-font" style="color: #cc0000; font-size: 3rem;">Wait! Let's look at the facts...</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+                <div class="modal-header border-0"><h3 class="modal-title w-100 text-center romantic-font" style="color: #F43605; font-size: 3rem;">Wait! Let's look at the facts...</h3></div>
                 <div class="modal-body">
                     <div class="row g-4">
-                        <div class="col-md-6">
-                            <div class="card comparison-card pros-card p-4">
-                                <h4 class="text-success fw-bold mb-3">Pros</h4>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2">💖 Your lifetime best friend</li>
-                                    <li class="mb-2">💖 A partner in Crime</li>
-                                    <li class="mb-2">💖 A person to listen to all your stories</li>
-                                    <li class="mb-2">💖 Person to fuck around with 🫣</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card comparison-card cons-card p-4">
-                                <div>
-                                    <h4 class="fw-bold mb-3" style="color:#cc0000">Cons</h4>
-                                    <h5 class="text-muted">❤️ No Cons</h5>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-md-6"><div class="card comparison-card p-4"><h4 class="text-success fw-bold">Pros</h4><ul class="list-unstyled"><li>💖 Your lifetime best friend</li><li>💖 A partner in Crime</li><li>💖 To listen to your stories</li><li>💖 Person to fuck around with 🫣</li></ul></div></div>
+                        <div class="col-md-6"><div class="card comparison-card p-4"><div><h4 class="fw-bold" style="color:#F43605">Cons</h4><h5 class="text-muted">❤️ No Cons</h5></div></div></div>
                     </div>
                 </div>
-                <div class="modal-footer border-0 justify-content-center">
-                    <button class="btn btn-love" onclick="finalizeYes()">Okay, I choose Yes! ❤️</button>
-                </div>
+                <div class="modal-footer border-0 justify-content-center"><button class="btn btn-love" onclick="finalizeYes()">Okay, I choose Yes! ❤️</button></div>
             </div>
         </div>
     </div>
@@ -163,18 +142,20 @@
         let flippedCards = new Set();
         const myModal = new bootstrap.Modal(document.getElementById('prosConsModal'));
 
-        // The No button actually triggers the "Yes" logic
-        function sayYes() {
-            myModal.show();
+        function verifySakku() {
+            document.getElementById('captchaOverlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('captchaOverlay').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                setTimeout(() => { document.getElementById('mainContent').style.opacity = '1'; }, 50);
+            }, 500);
         }
 
-        // Triggered from inside the modal
+        function showModal() { myModal.show(); }
+
         function finalizeYes() {
             myModal.hide();
-            document.getElementById('inviteCard').innerHTML = `
-                <div style="font-size: 4rem;">🎉</div>
-                <h2 class="romantic-font" style="font-size: 4rem; color: #cc0000; margin: 20px 0;">See You Soon! 💖</h2>
-            `;
+            document.getElementById('inviteCard').innerHTML = `<h2 class="romantic-font" style="font-size: 4rem; color: #F43605;">See You Soon! 💖</h2>`;
             document.getElementById('surpriseContainer').style.display = 'block';
         }
 
@@ -190,27 +171,19 @@
             if (flippedCards.size === 3) {
                 document.getElementById('countdownContainer').style.display = 'block';
                 startCountdown();
-                // Smooth scroll to the bottom to show the 3rd card and countdown
-                setTimeout(() => {
-                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-                }, 600);
+                setTimeout(() => { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }, 600);
             }
         }
 
         function startCountdown() {
-            const timer = setInterval(function() {
+            setInterval(function() {
                 let target = new Date();
                 target.setDate(target.getDate() + 1);
                 target.setHours(12, 0, 0, 0);
-                let now = new Date().getTime();
-                let distance = target - now;
-                let h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                let m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                let s = Math.floor((distance % (1000 * 60)) / 1000);
-                document.getElementById("hours").innerHTML = h.toString().padStart(2, '0');
-                document.getElementById("minutes").innerHTML = m.toString().padStart(2, '0');
-                document.getElementById("seconds").innerHTML = s.toString().padStart(2, '0');
-                if (distance < 0) { clearInterval(timer); document.getElementById("countdownContainer").innerHTML = "<h3 class='romantic-font' style='font-size: 3rem;'>Check your phone! 💖</h3>"; }
+                let dist = target - new Date().getTime();
+                document.getElementById("hours").innerHTML = Math.floor((dist % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById("minutes").innerHTML = Math.floor((dist % 3600000) / 60000).toString().padStart(2, '0');
+                document.getElementById("seconds").innerHTML = Math.floor((dist % 60000) / 1000).toString().padStart(2, '0');
             }, 1000);
         }
     </script>
